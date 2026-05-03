@@ -9,7 +9,7 @@ from typing import Optional
 
 log = logging.getLogger("portal.auth")
 
-SECRET   = os.getenv("PORTAL_SECRET", "dev-secret-change-in-production")
+SECRET   = os.getenv("PORTAL_SECRET", "dev-secret-change-in-production-32x")
 TTL_S    = int(os.getenv("PORTAL_SESSION_TTL_S", str(8 * 3600)))
 USERS_RAW = os.getenv("PORTAL_USERS", "jonah:jonah_01:changeme")
 # format: "username:owner_id:password,username2:owner_id2:password2"
