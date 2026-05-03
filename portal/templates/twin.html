@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twin — Novela</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --teal:#1D9E75;--teal-l:#E1F5EE;--teal-d:#0F6E56;
+  --purple:#7F77DD;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --amber:#EF9F27;--amber-l:#FAEEDA;
+  --coral:#D85A30;--coral-l:#FAECE7;
+  --bg:#FFFFFF;--s:#F7F7F5;--b:#E8E7E3;--t:#1A1A18;--m:#6B6B67;
+  --mono:'Courier New',monospace;--sans:system-ui,sans-serif;
+  --radius:10px;
+}
+body{font-family:var(--sans);color:var(--t);background:var(--bg);padding:0 1rem;}
+.topbar{display:flex;align-items:center;gap:12px;padding:1.25rem 0 1rem;border-bottom:0.5px solid var(--b);margin-bottom:1.5rem;}
+.back{font-family:var(--mono);font-size:11px;color:var(--m);text-decoration:none;padding:4px 10px;border-radius:8px;border:0.5px solid var(--b);}
+.back:hover{background:var(--s);}
+.twin-title{font-size:16px;font-weight:500;}
+.twin-badge{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:20px;background:var(--teal-l);color:var(--teal-d);border:0.5px solid var(--teal);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem;}
+.card{background:var(--bg);border:0.5px solid var(--b);border-radius:var(--radius);padding:14px;}
+.card-title{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--m);margin-bottom:12px;}
+.memory-list{display:flex;flex-direction:column;gap:8px;}
+.mem-item{display:flex;gap:8px;align-items:flex-start;padding-bottom:8px;border-bottom:0.5px solid var(--b);}
+.mem-item:last-child{border-bottom:none;}
+.mem-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);margin-top:4px;flex-shrink:0;}
+.mem-text{font-size:12px;line-height:1.5;flex:1;}
+.mem-cat{font-size:10px;font-family:var(--mono);color:var(--m);}
+.mem-del{font-size:10px;font-family:var(--mono);color:#E24B4A;cursor:pointer;flex-shrink:0;padding:2px 6px;}
+.add-row{display:flex;gap:8px;margin-top:12px;}
+.input{padding:7px 10px;border-radius:8px;border:0.5px solid var(--b);font-size:12px;font-family:var(--sans);background:var(--bg);color:var(--t);}
+.input:focus{outline:none;border-color:var(--teal);}
+.btn{font-family:var(--mono);font-size:11px;padding:7px 14px;border-radius:8px;border:0.5px solid var(--b);background:transparent;color:var(--t);cursor:pointer;white-space:nowrap;}
+.btn:hover{background:var(--s);}
+.btn-teal{background:var(--teal);color:#fff;border-color:var(--teal);}
+.btn-teal:hover{background:var(--teal-d);}
+.attr-list{display:flex;flex-direction:column;gap:6px;}
+.attr-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid var(--b);}
+.attr-key{color:var(--m);font-family:var(--mono);}
+.safety-flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.flag{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:20px;background:var(--amber-l);color:var(--amber);border:0.5px solid var(--amber);}
+.empty{font-family:var(--mono);font-size:11px;color:var(--m);font-style:italic;}
+.agents-mini{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.agent-pill{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:20px;background:var(--purple-l);color:var(--purple-d);border:0.5px solid var(--purple);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="/">← portal</a>
+  <div class="twin-title" id="twinTitle">loading twin...</div>
+  <div class="twin-badge" id="twinBadge">—</div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">memory graph</div>
+    <div class="memory-list" id="memoryList"><div class="empty">no memory nodes yet</div></div>
+    <div class="add-row">
+      <select class="input" id="memCat" style="flex:0 0 90px">
+        <option>general</option><option>health</option><option>finance</option>
+        <option>preference</option><option>context</option><option>tech</option>
+      </select>
+      <input class="input" id="memText" placeholder="add a memory..." style="flex:1">
+      <button class="btn btn-teal" onclick="addMemory()">add</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">twin info</div>
+    <div class="attr-list" id="attrList"></div>
+    <div style="margin-top:12px;">
+      <div class="card-title">safety domains</div>
+      <div class="safety-flags" id="safetyFlags"></div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="card-title">byngox agents</div>
+      <div class="agents-mini" id="agentsList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TWIN_ID = "{{ twin_id }}";
+
+async function load(){
+  try{
+    const r = await fetch(`/api/twins/${TWIN_ID}`);
+    const t = await r.json();
+    document.getElementById('twinTitle').textContent = t.display_name;
+    document.getElementById('twinBadge').textContent = t.twin_type + ' · ' + (t.language||'en');
+    renderAttrs(t);
+    renderMemory(t.memory_nodes||[]);
+    renderSafety(t.safety_flags||[]);
+    renderAgents(t.safety_flags||[]);
+  } catch(e){
+    document.getElementById('twinTitle').textContent = 'could not load twin';
+  }
+}
+
+function renderAttrs(t){
+  const el = document.getElementById('attrList');
+  const rows = [
+    ['twin id', t.twin_id.slice(0,12)+'...'],
+    ['type', t.twin_type],
+    ['language', t.language||'en'],
+    ['region', t.region||'KE'],
+    ['memory nodes', (t.memory_nodes||[]).length],
+    ['relationships', (t.relationships||[]).length],
+  ];
+  const attrs = t.attributes||{};
+  Object.entries(attrs).forEach(([k,v])=>{
+    if(v !== null && v !== '' && !(Array.isArray(v)&&!v.length))
+      rows.push([k, Array.isArray(v)?v.join(', '):String(v)]);
+  });
+  el.innerHTML = rows.map(([k,v])=>
+    `<div class="attr-row"><span class="attr-key">${k}</span><span>${v}</span></div>`
+  ).join('');
+}
+
+function renderMemory(nodes){
+  const el = document.getElementById('memoryList');
+  if(!nodes.length){ el.innerHTML = '<div class="empty">no memory nodes yet</div>'; return; }
+  el.innerHTML = nodes.map(n=>`
+    <div class="mem-item">
+      <div class="mem-dot"></div>
+      <div style="flex:1">
+        <div class="mem-text">${n.summary}</div>
+        <div class="mem-cat">[${n.category}] · ${Math.round(n.confidence*100)}% confidence</div>
+      </div>
+      <div class="mem-del" onclick="forgetNode('${n.node_id}')">✕</div>
+    </div>`).join('');
+}
+
+function renderSafety(flags){
+  const el = document.getElementById('safetyFlags');
+  if(!flags.length){ el.innerHTML = '<span class="empty">none</span>'; return; }
+  el.innerHTML = flags.map(f=>`<span class="flag">${f}</span>`).join('');
+}
+
+function renderAgents(safety){
+  const el = document.getElementById('agentsList');
+  const agents = ['coordination','context'];
+  if(safety.includes('medical')) agents.push('health','drug');
+  if(safety.includes('financial')) agents.push('context');
+  agents.push('learning','security');
+  const unique = [...new Set(agents)];
+  el.innerHTML = unique.map(a=>`<span class="agent-pill">${a}</span>`).join('');
+}
+
+async function addMemory(){
+  const cat = document.getElementById('memCat').value;
+  const txt = document.getElementById('memText').value.trim();
+  if(!txt) return;
+  await fetch(`/api/twins/${TWIN_ID}/memory`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({category:cat, summary:txt, confidence:1.0}),
+  });
+  document.getElementById('memText').value = '';
+  load();
+}
+
+async function forgetNode(nodeId){
+  await fetch(`/api/twins/${TWIN_ID}/memory/${nodeId}`, {method:'DELETE'});
+  load();
+}
+
+load();
+</script>
+</body>
+</html>
