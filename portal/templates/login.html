@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Twin Portal</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --teal:#1D9E75;--teal-l:#E1F5EE;--teal-d:#0F6E56;
+  --bg:#FFFFFF;--s:#F7F7F5;--b:#E8E7E3;--t:#1A1A18;--m:#6B6B67;
+  --mono:'Courier New',monospace;--sans:system-ui,sans-serif;
+}
+body{font-family:var(--sans);color:var(--t);background:var(--s);
+  display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.card{background:var(--bg);border:0.5px solid var(--b);border-radius:14px;
+  padding:2rem;width:100%;max-width:360px;}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;}
+.orb{width:32px;height:32px;border-radius:50%;background:var(--teal);
+  display:flex;align-items:center;justify-content:center;}
+.orb-i{width:12px;height:12px;border-radius:50%;background:#fff;opacity:0.9;}
+.logo-text{font-size:16px;font-weight:500;}
+.logo-text span{color:var(--teal);}
+.title{font-size:14px;font-weight:500;margin-bottom:4px;}
+.sub{font-size:12px;font-family:var(--mono);color:var(--m);margin-bottom:1.5rem;}
+.form-group{margin-bottom:12px;}
+.form-label{font-family:var(--mono);font-size:11px;color:var(--m);
+  margin-bottom:4px;display:block;}
+.form-input{width:100%;padding:9px 12px;border-radius:8px;
+  border:0.5px solid var(--b);font-size:13px;background:var(--bg);color:var(--t);}
+.form-input:focus{outline:none;border-color:var(--teal);}
+.btn{width:100%;padding:10px;border-radius:8px;border:none;
+  background:var(--teal);color:#fff;font-size:13px;
+  font-family:var(--mono);cursor:pointer;margin-top:8px;}
+.btn:hover{background:var(--teal-d);}
+.error{font-family:var(--mono);font-size:11px;color:#E24B4A;
+  margin-top:8px;display:none;}
+.hint{font-family:var(--mono);font-size:10px;color:var(--m);
+  margin-top:12px;text-align:center;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <div class="orb"><div class="orb-i"></div></div>
+    <div class="logo-text">twin<span>portal</span></div>
+  </div>
+  <div class="title">sign in</div>
+  <div class="sub">// powered by Chameha + Byngox</div>
+  <div class="form-group">
+    <label class="form-label">username</label>
+    <input class="form-input" id="username" placeholder="jonah" autocomplete="username">
+  </div>
+  <div class="form-group">
+    <label class="form-label">password</label>
+    <input class="form-input" id="password" type="password" autocomplete="current-password">
+  </div>
+  <button class="btn" onclick="login()">sign in ↗</button>
+  <div class="error" id="error">invalid credentials</div>
+  <div class="hint">default: jonah / changeme</div>
+</div>
+<script>
+document.addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+async function login(){
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  try{
+    const r = await fetch('/api/auth/login', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({username, password}),
+    });
+    if(r.ok){ window.location.href = '/'; }
+    else { document.getElementById('error').style.display='block'; }
+  } catch(e){ document.getElementById('error').style.display='block'; }
+}
+</script>
+</body>
+</html>

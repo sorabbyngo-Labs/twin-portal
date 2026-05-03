@@ -12,29 +12,37 @@
   --amber:#EF9F27;--amber-l:#FAEEDA;--amber-d:#854F0B;
   --coral:#D85A30;--coral-l:#FAECE7;--coral-d:#993C1D;
   --bg:#FFFFFF;--s:#F7F7F5;--b:#E8E7E3;--t:#1A1A18;--m:#6B6B67;
-  --mono:'Courier New',monospace;--sans:system-ui,sans-serif;
-  --radius:10px;
+  --mono:'Courier New',monospace;--sans:system-ui,sans-serif;--radius:10px;
 }
 body{font-family:var(--sans);color:var(--t);background:var(--bg);padding:0 1rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0 1rem;border-bottom:0.5px solid var(--b);margin-bottom:1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 0 1rem;border-bottom:0.5px solid var(--b);margin-bottom:1.5rem;}
 .logo{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:500;}
-.orb{width:30px;height:30px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;}
+.orb{width:30px;height:30px;border-radius:50%;background:var(--teal);
+  display:flex;align-items:center;justify-content:center;}
 .orb-i{width:11px;height:11px;border-radius:50%;background:#fff;opacity:0.9;}
 .logo span{color:var(--teal);}
-.pills{display:flex;gap:6px;}
+.topbar-right{display:flex;gap:8px;align-items:center;}
 .pill{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:20px;border:0.5px solid;}
 .pill-teal{background:var(--teal-l);color:var(--teal-d);border-color:var(--teal);}
 .pill-purple{background:var(--purple-l);color:var(--purple-d);border-color:var(--purple);}
+.pill-gray{background:var(--s);color:var(--m);border-color:var(--b);}
+.logout{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:20px;
+  border:0.5px solid var(--b);background:transparent;color:var(--m);cursor:pointer;}
+.logout:hover{border-color:#E24B4A;color:#E24B4A;}
 
-.chameha{background:var(--s);border-radius:var(--radius);padding:12px 16px;margin-bottom:1.25rem;display:flex;align-items:center;gap:12px;border:0.5px solid var(--b);}
-.mic{width:36px;height:36px;border-radius:50%;background:var(--teal);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.chameha{background:var(--s);border-radius:var(--radius);padding:12px 16px;
+  margin-bottom:1.25rem;display:flex;align-items:center;gap:12px;border:0.5px solid var(--b);}
+.mic{width:36px;height:36px;border-radius:50%;background:var(--teal);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .mic:hover{background:var(--teal-d);}
 .mic svg{width:14px;height:14px;}
 .wave-wrap{flex:1;height:24px;display:flex;align-items:center;gap:2px;overflow:hidden;}
 .wbar{width:2px;border-radius:2px;background:var(--teal);opacity:0.5;animation:wav 0.8s ease-in-out infinite;}
 @keyframes wav{0%,100%{height:3px}50%{height:var(--h)}}
 .chameha-text{font-family:var(--mono);font-size:11px;color:var(--m);font-style:italic;}
-.swarm-pill{font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:20px;background:var(--purple-l);color:var(--purple-d);border:0.5px solid var(--purple);flex-shrink:0;}
+.swarm-pill{font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:20px;
+  background:var(--purple-l);color:var(--purple-d);border:0.5px solid var(--purple);flex-shrink:0;}
 
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem;}
 .metric{background:var(--s);border-radius:var(--radius);padding:12px 14px;}
@@ -42,41 +50,53 @@ body{font-family:var(--sans);color:var(--t);background:var(--bg);padding:0 1rem;
 .mv{font-size:22px;font-weight:500;}
 .ms{font-size:10px;font-family:var(--mono);color:var(--teal);margin-top:2px;}
 
-.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:var(--m);text-transform:uppercase;margin-bottom:10px;}
+.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;
+  color:var(--m);text-transform:uppercase;margin-bottom:10px;}
 .twins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
-.twin-card{background:var(--bg);border:0.5px solid var(--b);border-radius:var(--radius);padding:14px;cursor:pointer;transition:border-color 0.15s,transform 0.12s;text-decoration:none;color:inherit;display:block;}
+.twin-card{background:var(--bg);border:0.5px solid var(--b);border-radius:var(--radius);
+  padding:14px;cursor:pointer;transition:border-color 0.15s,transform 0.12s;
+  text-decoration:none;color:inherit;display:block;}
 .twin-card:hover{transform:translateY(-1px);}
 .tc-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.tc-avatar{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.tc-avatar{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:15px;flex-shrink:0;}
 .tc-name{font-size:13px;font-weight:500;}
 .tc-type{font-size:10px;font-family:var(--mono);color:var(--m);}
-.tc-nodes{font-size:10px;font-family:var(--mono);color:var(--m);margin-top:8px;}
-.tc-open{font-size:10px;font-family:var(--mono);color:var(--teal);}
 .tc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.tc-nodes{font-size:10px;font-family:var(--mono);color:var(--m);}
+.tc-open{font-size:10px;font-family:var(--mono);color:var(--teal);}
 
-.create-card{background:var(--bg);border:0.5px dashed var(--b);border-radius:var(--radius);padding:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:120px;transition:border-color 0.15s;}
+.create-card{background:var(--bg);border:0.5px dashed var(--b);border-radius:var(--radius);
+  padding:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;min-height:120px;transition:border-color 0.15s;}
 .create-card:hover{border-color:var(--teal);}
-.create-plus{width:28px;height:28px;border-radius:50%;background:var(--teal-l);display:flex;align-items:center;justify-content:center;color:var(--teal-d);font-size:18px;line-height:1;}
+.create-plus{width:28px;height:28px;border-radius:50%;background:var(--teal-l);
+  display:flex;align-items:center;justify-content:center;color:var(--teal-d);font-size:18px;}
 .create-lbl{font-family:var(--mono);font-size:11px;color:var(--m);}
 
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center;}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);
+  z-index:100;align-items:center;justify-content:center;}
 .modal-bg.open{display:flex;}
-.modal{background:var(--bg);border-radius:14px;padding:1.5rem;width:100%;max-width:420px;border:0.5px solid var(--b);}
+.modal{background:var(--bg);border-radius:14px;padding:1.5rem;width:100%;
+  max-width:420px;border:0.5px solid var(--b);}
 .modal-title{font-size:15px;font-weight:500;margin-bottom:1rem;}
 .form-group{margin-bottom:12px;}
 .form-label{font-family:var(--mono);font-size:11px;color:var(--m);margin-bottom:4px;display:block;}
-.form-input{width:100%;padding:8px 12px;border-radius:8px;border:0.5px solid var(--b);font-size:13px;font-family:var(--sans);background:var(--bg);color:var(--t);}
+.form-input{width:100%;padding:8px 12px;border-radius:8px;border:0.5px solid var(--b);
+  font-size:13px;font-family:var(--sans);background:var(--bg);color:var(--t);}
 .form-input:focus{outline:none;border-color:var(--teal);}
 .form-row{display:flex;gap:8px;}
-.btn{font-family:var(--mono);font-size:11px;padding:8px 16px;border-radius:8px;border:0.5px solid var(--b);background:transparent;color:var(--t);cursor:pointer;}
+.btn{font-family:var(--mono);font-size:11px;padding:8px 16px;border-radius:8px;
+  border:0.5px solid var(--b);background:transparent;color:var(--t);cursor:pointer;}
 .btn:hover{background:var(--s);}
 .btn-teal{background:var(--teal);color:#fff;border-color:var(--teal);}
 .btn-teal:hover{background:var(--teal-d);}
 .btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:1rem;}
-.loading{font-family:var(--mono);font-size:11px;color:var(--m);text-align:center;padding:2rem;}
 .type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px;}
-.type-btn{padding:6px 8px;border-radius:8px;border:0.5px solid var(--b);background:var(--s);font-size:11px;font-family:var(--mono);cursor:pointer;text-align:center;transition:border-color 0.15s,background 0.15s;}
+.type-btn{padding:6px 8px;border-radius:8px;border:0.5px solid var(--b);
+  background:var(--s);font-size:11px;font-family:var(--mono);cursor:pointer;text-align:center;}
 .type-btn:hover,.type-btn.selected{border-color:var(--teal);background:var(--teal-l);color:var(--teal-d);}
+.loading{font-family:var(--mono);font-size:11px;color:var(--m);text-align:center;padding:2rem;}
 </style>
 </head>
 <body>
@@ -86,9 +106,11 @@ body{font-family:var(--sans);color:var(--t);background:var(--bg);padding:0 1rem;
     <div class="orb"><div class="orb-i"></div></div>
     twin<span>portal</span>
   </div>
-  <div class="pills">
-    <span class="pill pill-teal" id="chameha-status">● chameha</span>
-    <span class="pill pill-purple">● byngox swarm</span>
+  <div class="topbar-right">
+    <span class="pill pill-gray" id="userPill">{{ username }}</span>
+    <span class="pill pill-teal">● chameha</span>
+    <span class="pill pill-purple">● byngox</span>
+    <button class="logout" onclick="logout()">sign out</button>
   </div>
 </div>
 
@@ -130,10 +152,6 @@ body{font-family:var(--sans);color:var(--t);background:var(--bg);padding:0 1rem;
     </div>
     <div class="form-row">
       <div class="form-group" style="flex:1">
-        <label class="form-label">owner id</label>
-        <input class="form-input" id="ownerId" placeholder="u001">
-      </div>
-      <div class="form-group" style="flex:1">
         <label class="form-label">language</label>
         <select class="form-input" id="twinLang">
           <option value="en">English</option>
@@ -141,9 +159,19 @@ body{font-family:var(--sans);color:var(--t);background:var(--bg);padding:0 1rem;
           <option value="en-sw">EN + SW</option>
         </select>
       </div>
+      <div class="form-group" style="flex:1">
+        <label class="form-label">region</label>
+        <select class="form-input" id="twinRegion">
+          <option value="KE">Kenya</option>
+          <option value="UG">Uganda</option>
+          <option value="TZ">Tanzania</option>
+          <option value="NG">Nigeria</option>
+          <option value="GH">Ghana</option>
+        </select>
+      </div>
     </div>
     <div class="form-group">
-      <label class="form-label">custom type (if not above)</label>
+      <label class="form-label">custom type (if not listed above)</label>
       <input class="form-input" id="customType" placeholder="mosque, football_club, sacco...">
     </div>
     <div class="btn-row">
@@ -154,112 +182,107 @@ body{font-family:var(--sans);color:var(--t);background:var(--bg);padding:0 1rem;
 </div>
 
 <script>
-const OWNER = "jonah_01";
-let selectedType = "person";
+const TYPE_ICONS = {
+  person:'🧑',family:'👨‍👩‍👧',hospital:'🏥',chw:'🩺',
+  organisation:'🏢',government:'🏛️',school:'🏫',community:'🏘️',
+  church:'⛪',farm:'🌾',cooperative:'🤝',clinic:'💊',ngo:'🌍',market:'🛒',
+};
+const TYPE_COLORS = {
+  person:'#1D9E75',family:'#D4537E',hospital:'#E24B4A',chw:'#639922',
+  organisation:'#7F77DD',government:'#EF9F27',school:'#7F77DD',
+  community:'#D85A30',church:'#D85A30',farm:'#639922',
+  cooperative:'#1D9E75',clinic:'#E24B4A',ngo:'#378ADD',market:'#EF9F27',
+};
 
-// wave animation
+let selectedType = 'person';
+
 const ww = document.getElementById('waveWrap');
 [4,8,14,20,16,10,6,12,18,14,8,4,10,16,12,6,18,14,8,12].forEach((h,i)=>{
-  const b = document.createElement('div');
-  b.className = 'wbar';
-  b.style.cssText = `height:${h}px;--h:${h}px;animation-delay:${i*0.05}s;animation-duration:${0.5+Math.random()*0.6}s`;
+  const b=document.createElement('div');
+  b.className='wbar';
+  b.style.cssText=`height:${h}px;--h:${h}px;animation-delay:${i*0.05}s;animation-duration:${0.5+Math.random()*0.6}s`;
   ww.appendChild(b);
 });
 
-let micActive = false;
-const phrases = [
+let micActive=false;
+const phrases=[
   '"Hey Chameha, show my twins"',
   '"Chameha, create a church twin"',
   '"Hey Chameha, how is my organisation?"',
   '"Chameha, link my personal twin to my church"',
 ];
-let pi = 0;
+let pi=0;
 function toggleMic(){
-  micActive = !micActive;
-  const btn = document.getElementById('micBtn');
-  const txt = document.getElementById('chamehaText');
+  micActive=!micActive;
+  const btn=document.getElementById('micBtn');
+  const txt=document.getElementById('chamehaText');
   if(micActive){
-    btn.style.background = '#E24B4A';
-    txt.textContent = phrases[pi++ % phrases.length];
-    txt.style.fontStyle = 'normal';
-    txt.style.color = 'var(--t)';
+    btn.style.background='#E24B4A';
+    txt.textContent=phrases[pi++%phrases.length];
+    txt.style.fontStyle='normal';txt.style.color='var(--t)';
   } else {
-    btn.style.background = 'var(--teal)';
-    txt.textContent = 'say "Hey Chameha" to begin...';
-    txt.style.fontStyle = 'italic';
-    txt.style.color = 'var(--m)';
+    btn.style.background='var(--teal)';
+    txt.textContent='say "Hey Chameha" to begin...';
+    txt.style.fontStyle='italic';txt.style.color='var(--m)';
   }
 }
 
-const TYPE_ICONS = {
-  person:'🧑', family:'👨‍👩‍👧', hospital:'🏥', chw:'🩺',
-  organisation:'🏢', government:'🏛️', school:'🏫', community:'🏘️',
-  church:'⛪', farm:'🌾', cooperative:'🤝', clinic:'💊',
-  ngo:'🌍', market:'🛒',
-};
-const TYPE_COLORS = {
-  person:'var(--teal)', family:'#D4537E', hospital:'#E24B4A',
-  chw:'#639922', organisation:'var(--purple)', government:'var(--amber)',
-  school:'var(--purple)', community:'var(--coral)', church:'var(--coral)',
-  farm:'#639922', cooperative:'var(--teal)', clinic:'#E24B4A',
-  ngo:'var(--blue,#378ADD)', market:'var(--amber)',
-};
+async function logout(){
+  await fetch('/api/auth/logout',{method:'POST'});
+  window.location.href='/login';
+}
 
 async function loadSchemas(){
   try{
-    const r = await fetch('/api/schemas');
-    const schemas = await r.json();
-    document.getElementById('m-types').textContent = schemas.length;
-    const grid = document.getElementById('typeGrid');
-    grid.innerHTML = '';
+    const r=await fetch('/api/schemas');
+    if(r.status===401){window.location.href='/login';return;}
+    const schemas=await r.json();
+    document.getElementById('m-types').textContent=schemas.length;
+    const grid=document.getElementById('typeGrid');
+    grid.innerHTML='';
     schemas.slice(0,12).forEach(s=>{
-      const b = document.createElement('div');
-      b.className = 'type-btn' + (s.type_name === selectedType ? ' selected' : '');
-      b.textContent = (TYPE_ICONS[s.type_name]||'◆') + ' ' + s.type_name;
-      b.onclick = ()=>{
-        selectedType = s.type_name;
+      const b=document.createElement('div');
+      b.className='type-btn'+(s.type_name===selectedType?' selected':'');
+      b.textContent=(TYPE_ICONS[s.type_name]||'◆')+' '+s.type_name;
+      b.onclick=()=>{
+        selectedType=s.type_name;
         document.querySelectorAll('.type-btn').forEach(x=>x.classList.remove('selected'));
         b.classList.add('selected');
       };
       grid.appendChild(b);
     });
-  } catch(e){ console.warn('schemas load failed', e); }
+  }catch(e){console.warn(e);}
 }
 
 async function loadTwins(){
-  const grid = document.getElementById('twinsGrid');
+  const grid=document.getElementById('twinsGrid');
   try{
-    const r = await fetch(`/api/twins?owner=${OWNER}`);
-    const twins = await r.json();
-    document.getElementById('m-twins').textContent = twins.length;
-    let totalNodes = 0;
-    twins.forEach(t => totalNodes += (t.memory_nodes||[]).length);
-    document.getElementById('m-nodes').textContent = totalNodes;
-    grid.innerHTML = '';
-    twins.forEach(t => grid.appendChild(twinCard(t)));
-    const add = document.createElement('div');
-    add.className = 'create-card';
-    add.onclick = openModal;
-    add.innerHTML = '<div class="create-plus">+</div><div class="create-lbl">create a twin</div><div style="font-size:10px;font-family:var(--mono);color:var(--m);text-align:center">any entity type</div>';
+    const r=await fetch('/api/twins');
+    if(r.status===401){window.location.href='/login';return;}
+    const twins=await r.json();
+    document.getElementById('m-twins').textContent=twins.length;
+    let nodes=0;
+    twins.forEach(t=>nodes+=(t.memory_nodes||[]).length);
+    document.getElementById('m-nodes').textContent=nodes;
+    grid.innerHTML='';
+    twins.forEach(t=>grid.appendChild(twinCard(t)));
+    const add=document.createElement('div');
+    add.className='create-card';add.onclick=openModal;
+    add.innerHTML='<div class="create-plus">+</div><div class="create-lbl">create a twin</div><div style="font-size:10px;font-family:var(--mono);color:var(--m);text-align:center">any entity type</div>';
     grid.appendChild(add);
-  } catch(e){
-    grid.innerHTML = '<div class="loading">could not reach twin API — is it running on :8741?</div>';
-    const add = document.createElement('div');
-    add.className = 'create-card';
-    add.onclick = openModal;
-    add.innerHTML = '<div class="create-plus">+</div><div class="create-lbl">create a twin</div>';
-    grid.appendChild(add);
+  }catch(e){
+    grid.innerHTML='<div class="loading">could not reach twin API — is it running on :8741?</div>';
   }
 }
 
 function twinCard(t){
-  const a = document.createElement('a');
-  a.className = 'twin-card';
-  a.href = `/twin/${t.twin_id}`;
-  const color = TYPE_COLORS[t.twin_type] || 'var(--teal)';
-  const icon  = TYPE_ICONS[t.twin_type]  || '◆';
-  a.style.borderColor = color;
-  a.innerHTML = `
+  const a=document.createElement('a');
+  a.className='twin-card';
+  a.href=`/twin/${t.twin_id}`;
+  const color=TYPE_COLORS[t.twin_type]||'#1D9E75';
+  const icon=TYPE_ICONS[t.twin_type]||'◆';
+  a.style.borderColor=color;
+  a.innerHTML=`
     <div class="tc-top">
       <div class="tc-avatar" style="background:${color}22">${icon}</div>
       <div>
@@ -274,23 +297,24 @@ function twinCard(t){
   return a;
 }
 
-function openModal(){ loadSchemas(); document.getElementById('createModal').classList.add('open'); }
-function closeModal(){ document.getElementById('createModal').classList.remove('open'); }
+function openModal(){loadSchemas();document.getElementById('createModal').classList.add('open');}
+function closeModal(){document.getElementById('createModal').classList.remove('open');}
 
 async function createTwin(){
-  const type = document.getElementById('customType').value.trim() || selectedType;
-  const name = document.getElementById('twinName').value.trim();
-  const owner = document.getElementById('ownerId').value.trim() || OWNER;
-  const lang  = document.getElementById('twinLang').value;
-  if(!name){ alert('name required'); return; }
+  const type=document.getElementById('customType').value.trim()||selectedType;
+  const name=document.getElementById('twinName').value.trim();
+  const lang=document.getElementById('twinLang').value;
+  const region=document.getElementById('twinRegion').value;
+  if(!name){alert('name required');return;}
   try{
-    const r = await fetch('/api/twins', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({type_name:type, name, owner_id:owner, language:lang}),
+    const r=await fetch('/api/twins',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({type_name:type,name,language:lang,region}),
     });
-    if(r.ok){ closeModal(); loadTwins(); }
-    else { alert('failed to create twin — is the twin API running?'); }
-  } catch(e){ alert('could not reach portal API'); }
+    if(r.ok){closeModal();loadTwins();}
+    else if(r.status===401){window.location.href='/login';}
+    else{alert('failed to create twin');}
+  }catch(e){alert('could not reach portal API');}
 }
 
 loadTwins();

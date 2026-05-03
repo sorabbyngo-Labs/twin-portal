@@ -175,3 +175,28 @@ def api_interaction(twin_id):
 @app.post("/api/twins/<twin_id>/aggregate/<member_id>")
 def api_aggregate(twin_id, member_id):
     return jsonify({"ok": aggregate(twin_id, member_id)})
+
+
+# -- Chameha voice ------------------------------------------------------------
+
+@app.post("/api/voice")
+@require_auth
+def api_voice():
+    """
+    Receive text from the portal voice bar (after browser STT),
+    route to Chameha, return text response (browser handles TTS).
+    Falls back to Byngox query routing if Chameha is unavailable.
+    """
+    from bridge.chameha import ask_personal
+    b = request.json or {}
+    text    = b.get("text", "")
+    twin_id = b.get("twin_id", "")
+    domain  = b.get("domain", "general")
+    if not text:
+        return jsonify({"error": "text required"}), 400
+    response = ask_personal(text, request.owner_id, twin_id, domain)
+    if not response:
+        plan = route_query(query=text, twin_id=twin_id, domain=domain)
+        return jsonify({"response": f"Routing to {', '.join(plan['agents'])}...",
+                        "agents": plan["agents"], "fallback": True})
+    return jsonify({"response": response, "fallback": False})
